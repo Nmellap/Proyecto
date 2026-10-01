@@ -7,6 +7,14 @@ services:
       - "3001:3001"
     environment:
       PORT: 3001
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: ${POSTGRES_DB:-contigo}
+      DB_USER: ${POSTGRES_USER:-contigo}
+      DB_PASSWORD: ${POSTGRES_PASSWORD:-contigo_dev_only}
+    depends_on:
+      db:
+        condition: service_healthy
     restart: unless-stopped
 
   frontend:
@@ -17,6 +25,23 @@ services:
       - "3000:3000"
     depends_on:
       - backend
-    environment:
-      API_URL: http://localhost:3001
     restart: unless-stopped
+
+  db:
+    image: postgres:16-alpine
+    container_name: contigo-db
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-contigo}
+      POSTGRES_USER: ${POSTGRES_USER:-contigo}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-contigo_dev_only}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-contigo} -d ${POSTGRES_DB:-contigo}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+volumes:
+  postgres_data:

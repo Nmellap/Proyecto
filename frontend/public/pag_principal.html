@@ -6,13 +6,14 @@
     <title>Contigo | Bienestar emocional</title>
     <style>
       :root {
-        --bg: #f4efe9;
+        --bg: #f1f8e9;
         --panel: rgba(255, 255, 255, 0.72);
         --panel-strong: #ffffff;
         --text: #1f2a37;
         --muted: #617083;
-        --primary: #7ec5b3;
-        --primary-dark: #4d8d7d;
+        --primary: #69c93b;
+        --primary-rgb: 105, 201, 59;
+        --primary-dark: #2e7b27;
         --warm: #f7ce7b;
         --red: #e7888d;
         --shadow: 0 18px 45px rgba(57, 72, 82, 0.12);
@@ -26,8 +27,7 @@
         margin: 0;
         min-height: 100vh;
         font-family: Arial, Helvetica, sans-serif;
-        background:
-          radial-gradient(circle at top, #f8f4ee 0%, #f2ebdf 28%, #edf2f4 100%);
+        background: linear-gradient(115deg, #edf7de 0%, #fbfbea 48%, #e2f4e9 100%);
         color: var(--text);
       }
 
@@ -60,7 +60,7 @@
         width: 36px;
         height: 36px;
         border-radius: 12px;
-        background: linear-gradient(135deg, var(--primary), #d7f1ea);
+        background: linear-gradient(135deg, var(--primary), #d8f3c6);
         display: grid;
         place-items: center;
         font-size: 1.2rem;
@@ -80,12 +80,12 @@
 
       .cta {
         border: none;
-        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        background: linear-gradient(135deg, var(--primary-dark), #24651f);
         color: white;
         border-radius: 999px;
         padding: 12px 20px;
         font-weight: 700;
-        box-shadow: 0 10px 22px rgba(94, 170, 152, 0.3);
+        box-shadow: 0 10px 22px rgba(46, 123, 39, 0.3);
         cursor: pointer;
         transition: transform 0.2s ease, box-shadow 0.2s ease;
       }
@@ -105,7 +105,7 @@
 
       .eyebrow {
         display: inline-block;
-        background: rgba(126, 197, 179, 0.12);
+        background: rgba(var(--primary-rgb), 0.12);
         color: var(--primary-dark);
         padding: 8px 12px;
         border-radius: 999px;
@@ -140,7 +140,7 @@
       }
 
       .secondary {
-        border: 1px solid rgba(94, 170, 152, 0.4);
+        border: 1px solid rgba(46, 123, 39, 0.4);
         color: var(--primary-dark);
         background: rgba(255,255,255,0.24);
         border-radius: 999px;
@@ -199,7 +199,7 @@
       .status {
         color: var(--primary-dark);
         font-weight: 700;
-        background: rgba(126, 197, 179, 0.12);
+        background: rgba(var(--primary-rgb), 0.12);
         padding: 8px 12px;
         border-radius: 999px;
         font-size: 0.8rem;
@@ -232,7 +232,7 @@
         appearance: none;
         height: 12px;
         border-radius: 999px;
-        background: linear-gradient(90deg, #f7d790 0%, #e9b38a 30%, #d8928d 65%, #c77ab3 100%);
+        background: linear-gradient(90deg, #dce9ad 0%, #abd778 30%, var(--primary) 65%, var(--primary-dark) 100%);
         outline: none;
         cursor: pointer;
         box-shadow: inset 0 0 0 1px rgba(90, 104, 112, 0.08);
@@ -276,7 +276,7 @@
         border-radius: 999px;
         font-size: 0.8rem;
         font-weight: 700;
-        background: rgba(126, 197, 179, 0.14);
+        background: rgba(var(--primary-rgb), 0.14);
         color: var(--primary-dark);
       }
 
@@ -349,7 +349,7 @@
         display: grid;
         place-items: center;
         border-radius: 14px;
-        background: rgba(126, 197, 179, 0.12);
+        background: rgba(var(--primary-rgb), 0.12);
         font-size: 1.5rem;
         margin-bottom: 12px;
       }
@@ -365,6 +365,63 @@
         line-height: 1.6;
       }
 
+      .contact-copy {
+        max-width: 620px;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .contact-form {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+        max-width: 760px;
+        margin-top: 24px;
+      }
+
+      .form-field {
+        display: grid;
+        gap: 7px;
+      }
+
+      .form-field-wide,
+      .form-status {
+        grid-column: 1 / -1;
+      }
+
+      .form-field label {
+        font-weight: 700;
+        font-size: 0.92rem;
+      }
+
+      .form-field input,
+      .form-field textarea {
+        width: 100%;
+        border: 1px solid rgba(46, 123, 39, 0.25);
+        border-radius: 8px;
+        padding: 12px 14px;
+        color: var(--text);
+        background: rgba(255, 255, 255, 0.78);
+        font: inherit;
+      }
+
+      .form-field input:focus,
+      .form-field textarea:focus {
+        outline: 3px solid rgba(var(--primary-rgb), 0.2);
+        border-color: var(--primary-dark);
+      }
+
+      .form-field textarea {
+        min-height: 150px;
+        resize: vertical;
+      }
+
+      .form-status {
+        min-height: 1.5em;
+        margin: 0;
+        color: var(--primary-dark);
+      }
+
       @media (max-width: 860px) {
         .hero {
           grid-template-columns: 1fr;
@@ -376,6 +433,15 @@
 
         .nav {
           display: none;
+        }
+
+        .contact-form {
+          grid-template-columns: 1fr;
+        }
+
+        .form-field-wide,
+        .form-status {
+          grid-column: auto;
         }
       }
     </style>
@@ -393,7 +459,7 @@
           <a href="#recursos">Recursos</a>
           <a href="#contacto">Contacto</a>
         </nav>
-        <button class="cta">Solicitar información</button>
+        <a class="cta" href="#contacto">Solicitar información</a>
       </header>
 
       <main class="hero" id="inicio">
@@ -493,6 +559,32 @@
           </article>
         </div>
       </section>
+
+      <section class="section" id="contacto">
+        <div class="eyebrow">Contacto</div>
+        <h2>Escríbenos</h2>
+        <p class="contact-copy">Déjanos tus datos y nos pondremos en contacto contigo.</p>
+        <form class="contact-form" id="contactForm">
+          <div class="form-field">
+            <label for="firstName">Nombre</label>
+              <input id="firstName" name="nombre" type="text" required maxlength="80" autocomplete="given-name" pattern="[\p{L}][\p{L}\p{M}]*(?:[\u0020\u0027\u2019\u002D][\p{L}][\p{L}\p{M}]*)*" title="Usa letras; puedes incluir espacios, guiones y apóstrofos." />
+            </div>
+            <div class="form-field">
+              <label for="lastName">Apellido</label>
+              <input id="lastName" name="apellido" type="text" required maxlength="80" autocomplete="family-name" pattern="[\p{L}][\p{L}\p{M}]*(?:[\u0020\u0027\u2019\u002D][\p{L}][\p{L}\p{M}]*)*" title="Usa letras; puedes incluir espacios, guiones y apóstrofos." />
+            </div>
+          <div class="form-field form-field-wide">
+            <label for="email">Correo electrónico</label>
+            <input id="email" name="email" type="email" required maxlength="254" autocomplete="email" />
+          </div>
+          <div class="form-field form-field-wide">
+            <label for="message">Mensaje <span>(opcional)</span></label>
+            <textarea id="message" name="mensaje" maxlength="2000"></textarea>
+          </div>
+          <button class="cta" type="submit">Enviar mensaje</button>
+          <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+        </form>
+      </section>
     </div>
 
     <script>
@@ -570,6 +662,35 @@
       });
 
       updateMood(Number(slider.value));
+
+      const contactForm = document.getElementById('contactForm');
+      const formStatus = document.getElementById('formStatus');
+
+      contactForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        if (!contactForm.reportValidity()) return;
+
+        const submitButton = contactForm.querySelector('button[type="submit"]');
+        submitButton.disabled = true;
+        formStatus.textContent = 'Enviando...';
+
+        try {
+          const response = await fetch(`${window.location.protocol}//${window.location.hostname}:3001/api/contact`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(Object.fromEntries(new FormData(contactForm)))
+          });
+          const result = await response.json();
+          if (!response.ok) throw new Error(result.message || 'No se pudo enviar el mensaje.');
+
+          contactForm.reset();
+          formStatus.textContent = result.message;
+        } catch (error) {
+          formStatus.textContent = error.message || 'No se pudo conectar con el servidor.';
+        } finally {
+          submitButton.disabled = false;
+        }
+      });
     </script>
   </body>
 </html>

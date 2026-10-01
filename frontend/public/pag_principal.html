@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contigo | Bienestar emocional</title>
+    <style>
+      :root {
+        --bg: #f4efe9;
+        --panel: rgba(255, 255, 255, 0.72);
+        --panel-strong: #ffffff;
+        --text: #1f2a37;
+        --muted: #617083;
+        --primary: #7ec5b3;
+        --primary-dark: #4d8d7d;
+        --warm: #f7ce7b;
+        --red: #e7888d;
+        --shadow: 0 18px 45px rgba(57, 72, 82, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: Arial, Helvetica, sans-serif;
+        background:
+          radial-gradient(circle at top, #f8f4ee 0%, #f2ebdf 28%, #edf2f4 100%);
+        color: var(--text);
+      }
+
+      .page {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 32px 24px 64px;
+      }
+
+      .topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.45);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(130, 145, 158, 0.12);
+        border-radius: 18px;
+        padding: 12px 18px;
+        box-shadow: var(--shadow);
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 700;
+      }
+
+      .brand-mark {
+        width: 36px;
+        height: 36px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, var(--primary), #d7f1ea);
+        display: grid;
+        place-items: center;
+        font-size: 1.2rem;
+      }
+
+      .nav {
+        display: flex;
+        gap: 18px;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .nav a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .cta {
+        border: none;
+        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        color: white;
+        border-radius: 999px;
+        padding: 12px 20px;
+        font-weight: 700;
+        box-shadow: 0 10px 22px rgba(94, 170, 152, 0.3);
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .cta:hover,
+      .secondary:hover {
+        transform: translateY(-1px);
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 30px;
+        align-items: center;
+        padding: 56px 0 26px;
+      }
+
+      .eyebrow {
+        display: inline-block;
+        background: rgba(126, 197, 179, 0.12);
+        color: var(--primary-dark);
+        padding: 8px 12px;
+        border-radius: 999px;
+        font-weight: 700;
+        font-size: 0.82rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 18px 0 16px;
+        font-size: clamp(2.6rem, 5vw, 5rem);
+        line-height: 0.95;
+        letter-spacing: -0.05em;
+      }
+
+      .highlight {
+        color: var(--primary-dark);
+      }
+
+      .subtitle {
+        max-width: 560px;
+        color: var(--muted);
+        font-size: 1.1rem;
+        line-height: 1.7;
+      }
+
+      .actions {
+        display: flex;
+        gap: 16px;
+        margin-top: 26px;
+      }
+
+      .secondary {
+        border: 1px solid rgba(94, 170, 152, 0.4);
+        color: var(--primary-dark);
+        background: rgba(255,255,255,0.24);
+        border-radius: 999px;
+        padding: 12px 20px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+      }
+
+      .metrics {
+        display: flex;
+        gap: 18px;
+        margin-top: 28px;
+        flex-wrap: wrap;
+      }
+
+      .pill {
+        background: rgba(255,255,255,0.52);
+        border: 1px solid rgba(100, 116, 130, 0.1);
+        border-radius: 16px;
+        padding: 14px 18px;
+        min-width: 140px;
+        box-shadow: 0 8px 18px rgba(15, 23, 42, 0.04);
+      }
+
+      .pill strong {
+        display: block;
+        font-size: 1.3rem;
+      }
+
+      .pill span {
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
+
+      .thermo-panel {
+        background: linear-gradient(180deg, rgba(255,255,255,0.86), rgba(244,249,247,0.85));
+        border: 1px solid rgba(110, 130, 145, 0.08);
+        border-radius: 28px;
+        padding: 24px 22px 18px;
+        box-shadow: var(--shadow);
+      }
+
+      .thermo-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 18px;
+      }
+
+      .thermo-head h3 {
+        margin: 0;
+        font-size: 1.15rem;
+      }
+
+      .status {
+        color: var(--primary-dark);
+        font-weight: 700;
+        background: rgba(126, 197, 179, 0.12);
+        padding: 8px 12px;
+        border-radius: 999px;
+        font-size: 0.8rem;
+      }
+
+      .daily-summary {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+        align-items: center;
+        margin-top: 12px;
+      }
+
+      .slider-wrap {
+        padding: 12px 4px 0;
+      }
+
+      .slider-labels {
+        display: flex;
+        justify-content: space-between;
+        color: var(--muted);
+        font-size: 0.72rem;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+
+      .slider {
+        width: 100%;
+        -webkit-appearance: none;
+        appearance: none;
+        height: 12px;
+        border-radius: 999px;
+        background: linear-gradient(90deg, #f7d790 0%, #e9b38a 30%, #d8928d 65%, #c77ab3 100%);
+        outline: none;
+        cursor: pointer;
+        box-shadow: inset 0 0 0 1px rgba(90, 104, 112, 0.08);
+      }
+
+      .slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: #ffffff;
+        border: 4px solid var(--primary-dark);
+        box-shadow: 0 4px 14px rgba(55, 75, 84, 0.2);
+      }
+
+      .slider::-moz-range-thumb {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: #ffffff;
+        border: 4px solid var(--primary-dark);
+        box-shadow: 0 4px 14px rgba(55, 75, 84, 0.2);
+      }
+
+      .emotion-panel {
+        background: rgba(255,255,255,0.6);
+        border: 1px solid rgba(100, 116, 130, 0.12);
+        border-radius: 18px;
+        padding: 16px 14px;
+      }
+
+      .emotion-panel h4 {
+        margin: 0 0 10px;
+        font-size: 1rem;
+      }
+
+      .emotion-pill {
+        display: inline-block;
+        padding: 7px 10px;
+        border-radius: 999px;
+        font-size: 0.8rem;
+        font-weight: 700;
+        background: rgba(126, 197, 179, 0.14);
+        color: var(--primary-dark);
+      }
+
+      .emotion-panel p {
+        margin: 12px 0 0;
+        color: var(--muted);
+        line-height: 1.55;
+        font-size: 0.9rem;
+      }
+
+      .tips {
+        margin-top: 16px;
+        background: rgba(255,255,255,0.6);
+        border-radius: 16px;
+        padding: 14px 16px;
+        border: 1px solid rgba(100, 116, 130, 0.1);
+      }
+
+      .tips h5 {
+        margin: 0 0 8px;
+        font-size: 0.85rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--primary-dark);
+      }
+
+      .tips ul {
+        margin: 0;
+        padding-left: 18px;
+        color: var(--muted);
+        line-height: 1.7;
+        font-size: 0.9rem;
+      }
+
+      .legend {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 18px;
+        color: var(--muted);
+        font-size: 0.8rem;
+      }
+
+      .legend strong {
+        color: var(--text);
+      }
+
+      .section {
+        margin-top: 42px;
+        padding-top: 14px;
+      }
+
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 22px;
+        margin-top: 30px;
+      }
+
+      .card {
+        background: rgba(255,255,255,0.56);
+        border: 1px solid rgba(130,145,158,0.08);
+        border-radius: 22px;
+        padding: 22px 18px;
+        box-shadow: 0 10px 20px rgba(20, 24, 35, 0.04);
+      }
+
+      .icon {
+        width: 48px;
+        height: 48px;
+        display: grid;
+        place-items: center;
+        border-radius: 14px;
+        background: rgba(126, 197, 179, 0.12);
+        font-size: 1.5rem;
+        margin-bottom: 12px;
+      }
+
+      .card h4 {
+        margin: 0 0 8px;
+        font-size: 1.15rem;
+      }
+
+      .card p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      @media (max-width: 860px) {
+        .hero {
+          grid-template-columns: 1fr;
+        }
+
+        .cards {
+          grid-template-columns: 1fr;
+        }
+
+        .nav {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header class="topbar">
+        <div class="brand">
+          <div class="brand-mark">☾</div>
+          <span>Contigo</span>
+        </div>
+        <nav class="nav">
+          <a href="#inicio">Inicio</a>
+          <a href="#bienestar">Bienestar</a>
+          <a href="#recursos">Recursos</a>
+          <a href="#contacto">Contacto</a>
+        </nav>
+        <button class="cta">Solicitar información</button>
+      </header>
+
+      <main class="hero" id="inicio">
+        <section>
+          <div class="eyebrow">Salud emocional</div>
+          <h1>
+            Tu bienestar<br />
+            empieza con <span class="highlight">reconocer</span> cómo te sientes.
+          </h1>
+          <p class="subtitle">
+            Acompañamos a las personas en momentos de ansiedad con apoyo claro,
+            estrategias útiles y un espacio seguro para respirar, reflexionar y avanzar con calma.
+          </p>
+
+          <div class="actions">
+            <button class="cta">Hablar con un especialista</button>
+            <button class="secondary">Conocer recursos</button>
+          </div>
+
+          <div class="metrics">
+            <div class="pill">
+              <strong>4.9/5</strong>
+              <span>Experiencia</span>
+            </div>
+            <div class="pill">
+              <strong>12k+</strong>
+              <span>Personas acompañadas</span>
+            </div>
+            <div class="pill">
+              <strong>24/7</strong>
+              <span>Apoyo disponible</span>
+            </div>
+          </div>
+        </section>
+
+        <aside class="thermo-panel" aria-label="Panel del estado emocional diario">
+          <div class="thermo-head">
+            <h3>¿Cómo estuvo tu día?</h3>
+            <span class="status" id="status">Estable</span>
+          </div>
+
+          <div class="daily-summary">
+            <div class="slider-wrap">
+              <div class="slider-labels">
+                <span>Bajo</span>
+                <span>Medio</span>
+                <span>Alto</span>
+              </div>
+              <input id="moodSlider" class="slider" type="range" min="0" max="100" value="72" aria-label="Selecciona tu estado de ánimo" />
+            </div>
+
+            <div class="emotion-panel">
+              <h4>Estado de ánimo</h4>
+              <span class="emotion-pill" id="emotionTag">Estado estable</span>
+              <p id="emotionText">
+                Tu día se percibe manejable. Puedes sostenerlo con pausas, descanso y atención a tus señales internas.
+              </p>
+            </div>
+          </div>
+
+          <div class="tips">
+            <h5>Consejos según tu estado</h5>
+            <ul id="tipsList">
+              <li>Haz una pausa breve y respira en ciclos de 4 segundos al inhalar y 6 al exhalar.</li>
+              <li>Reduce la carga de decisiones: prioriza solo una tarea esencial del día.</li>
+              <li>Escribe qué te está generando tensión; a menudo aliviarla ayuda a calmar la ansiedad.</li>
+              <li>Recuerda que una emoción baja no indica debilidad: es una señal de que necesitas contención y cuidado.</li>
+            </ul>
+          </div>
+
+          <div class="legend">
+            <span><strong id="wellbeingPercent">72%</strong> bienestar general</span>
+            <span>Hoy</span>
+          </div>
+        </aside>
+      </main>
+
+      <section class="section" id="bienestar">
+        <div class="eyebrow">Cómo te acompañamos</div>
+        <div class="cards">
+          <article class="card">
+            <div class="icon">✦</div>
+            <h4>Autoobservación</h4>
+            <p>Reconoce tus emociones con preguntas sencillas y guiadas para entender qué te está pasando.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">☁</div>
+            <h4>Respira con calma</h4>
+            <p>Practicas breves para bajar la activación, descansar la mente y volver a tu centro.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">◎</div>
+            <h4>Seguimiento</h4>
+            <p>Monitorea tu estado emocional para ver patrones, avances y momentos de mayor claridad.</p>
+          </article>
+        </div>
+      </section>
+    </div>
+
+    <script>
+      const slider = document.getElementById('moodSlider');
+      const status = document.getElementById('status');
+      const emotionTag = document.getElementById('emotionTag');
+      const emotionText = document.getElementById('emotionText');
+      const tipsList = document.getElementById('tipsList');
+      const wellbeingPercent = document.getElementById('wellbeingPercent');
+
+      const moodData = [
+        {
+          min: 0,
+          max: 25,
+          label: 'Bajo',
+          tag: 'Estado bajo',
+          message: 'La energía se siente muy disminuida. No es una falla; es una señal para reducir la exigencia y priorizar el descanso.',
+          tips: [
+            'Haz una pausa breve y respira en ciclos de 4 segundos al inhalar y 6 al exhalar.',
+            'Limita tus decisiones del momento: elige solo lo esencial.',
+            'Si la ansiedad te abruma, escribe lo que te preocupa y separa lo urgente de lo importante.'
+          ]
+        },
+        {
+          min: 26,
+          max: 50,
+          label: 'Moderado',
+          tag: 'Estado moderado',
+          message: 'Hay cierto cansancio o tensión. Esto puede mejorar con pausas pequeñas y menos exigencia interna.',
+          tips: [
+            'Reducir la presión por rendir puede ayudarte a recuperar claridad.',
+            'Haz una pausa de 5 minutos sin pantalla y con aire fresco.',
+            'Ajusta la jornada: no todo tiene que resolverse hoy.'
+          ]
+        },
+        {
+          min: 51,
+          max: 75,
+          label: 'Estable',
+          tag: 'Estado estable',
+          message: 'Tu día se percibe manejable. Mantener rutinas suaves puede ayudarte a sostener este equilibrio.',
+          tips: [
+            'Sigue cuidando tus pausas y tus límites.',
+            'Mantén una rutina pequeña: agua, descanso y una tarea concreta.',
+            'No te exijas más de lo que puedes sostener en este momento.'
+          ]
+        },
+        {
+          min: 76,
+          max: 100,
+          label: 'Alto',
+          tag: 'Estado alto',
+          message: 'Hay mayor energía, aunque también puede haber más activación. Cuidar tus límites te ayuda a mantenerlo en equilibrio.',
+          tips: [
+            'Sigue con flujo, pero evita sobrecargarte con demasiadas tareas.',
+            'Usa pausas breves para regular la activación.',
+            'Escucha tu cuerpo: si sientes presión, reduce la carga.'
+          ]
+        }
+      ];
+
+      function updateMood(value) {
+        const mood = moodData.find((item) => value >= item.min && value <= item.max) || moodData[2];
+        const percent = Math.round(value);
+
+        status.textContent = mood.label;
+        emotionTag.textContent = mood.tag;
+        emotionText.textContent = mood.message;
+        wellbeingPercent.textContent = `${percent}%`;
+        tipsList.innerHTML = mood.tips.map((tip) => `<li>${tip}</li>`).join('');
+      }
+
+      slider.addEventListener('input', (event) => {
+        updateMood(Number(event.target.value));
+      });
+
+      updateMood(Number(slider.value));
+    </script>
+  </body>
+</html>

@@ -675,7 +675,10 @@
         formStatus.textContent = 'Enviando...';
 
         try {
-          const response = await fetch(`${window.location.protocol}//${window.location.hostname}:3001/api/contact`, {
+          const apiBase = window.location.protocol === 'file:'
+            ? 'http://localhost:3001'
+            : `${window.location.protocol}//${window.location.hostname}:3001`;
+          const response = await fetch(`${apiBase}/api/contact`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(Object.fromEntries(new FormData(contactForm)))

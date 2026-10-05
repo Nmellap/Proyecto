@@ -42,3 +42,4 @@ git push -u origin main
 ```bash
 docker compose exec db psql -U contigo -d contigo -c "SELECT first_name, last_name, email, message, created_at FROM contact_messages ORDER BY created_at DESC;"
 ```
+                                                          
